@@ -126,4 +126,8 @@ export default {
   },
   autoSizing: Boolean,
   videoEnabled: Boolean,
+  fillPlaceholderImage: {
+    type: Boolean,
+    default: true
+  },
 }

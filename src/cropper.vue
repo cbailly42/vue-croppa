@@ -599,7 +599,7 @@ export default {
       if (!img) return
 
       var onLoad = () => {
-        this.ctx.drawImage(img, 0, 0, this.outputWidth, this.outputHeight)
+        this.fillPlaceholderImage ? this._fillCanvas(img) : this._fitCanvas(img)
       }
 
       if (u.imageLoaded(img)) {
@@ -607,6 +607,54 @@ export default {
       } else {
         img.onload = onLoad
       }
+    },
+
+    _fillCanvas (img) {
+      var imageWidth = img.width
+      var imageHeight = img.height
+      var ratio = Math.min(this.outputWidth / imageWidth, this.outputHeight / imageHeight)
+      var newWidth = imageWidth * ratio
+      var newHeight = imageHeight * ratio
+      var ar = 1
+
+      if (newWidth < this.outputWidth) {
+        ar = this.outputWidth / newWidth
+      }
+
+      if (Math.abs(ar - 1) < 1e-14 && newHeight < this.outputHeight) {
+        ar = this.outputHeight / newHeight
+      }
+
+      newWidth *= ar;
+      newHeight *= ar;
+
+      var sourceWidth = imageWidth / (newWidth / this.outputWidth)
+      var sourceHeight = imageHeight / (newHeight / this.outputHeight)
+
+      var sourceX = (imageWidth - sourceWidth) * 0.5
+      var sourceY = (imageHeight - sourceHeight) * 0.5
+
+      if (sourceX < 0) {
+        sourceX = 0
+      }
+
+      if (sourceY < 0) {
+        sourceY = 0
+      }
+
+      if (sourceWidth > imageWidth) {
+        sourceWidth = imageWidth
+      }
+
+      if (sourceHeight > imageHeight) {
+        sourceHeight = imageHeight
+      }
+
+      this.ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, this.outputWidth, this.outputHeight);
+    },
+
+    _fitCanvas (img) {
+      this.ctx.drawImage(img, 0, 0, this.outputWidth, this.outputHeight)
     },
 
     _setTextPlaceholder () {

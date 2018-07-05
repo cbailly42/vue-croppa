@@ -80,16 +80,14 @@
   .sk-fading-circle .sk-circle12 .sk-circle-indicator {
     -webkit-animation-delay: -0.08333s;
             animation-delay: -0.08333s; }
-
-@-webkit-keyframes sk-circleFadeDelay {
+  @-webkit-keyframes sk-circleFadeDelay {
   0%,
   39%,
   100% {
     opacity: 0; }
   40% {
     opacity: 1; } }
-
-@keyframes sk-circleFadeDelay {
+  @keyframes sk-circleFadeDelay {
   0%,
   39%,
   100% {

@@ -1,8 +1,6 @@
-# vue-croppa
+# df-croppa
 
-> A simple straightforward customizable mobile-friendly image cropper for Vue 2.0.
-
-<a href="https://zhanziyang.github.io/vue-croppa/"><img src="https://zhanziyang.github.io/vue-croppa/static/preview2.png?v=3" width="400" alt="try it out" /></a>
+> A fork from vue-croppa adding some missing features.
 
 ## Features
 
@@ -47,11 +45,11 @@
         :remove-button-color="'red'"
         :remove-button-size="0"
         :initial-image="'path/to/initial-image.png'"
+        :fillPlaceholderImage="false"
         @init="handleCroppaInit"
         @file-choose="handleCroppaFileChoose"
         @file-size-exceed="handleCroppaFileSizeExceed"
         @file-type-mismatch="handleCroppaFileTypeMismatch"
-        @new-image-drawn="handleNewImage"
         @image-remove="handleImageRemove"
         @move="handleCroppaMove"
         @zoom="handleCroppaZoom"></croppa>
@@ -75,31 +73,31 @@ alert(this.myCroppa.generateDataUrl());
 
 ## Quick Start
 
-### 1. Import vue-croppa into your vue.js project.
+### 1. Import df-croppa into your vue.js project.
 
 Using build tools:
 
 ```bash
-npm install --save vue-croppa
+npm install --save df-croppa
 ```
 
 ```js
 import Vue from 'vue';
-import Croppa from 'vue-croppa';
+import Croppa from 'df-croppa';
 
 Vue.use(Croppa);
 ```
 
 ```js
 // If your build tool supports css module
-import 'vue-croppa/dist/vue-croppa.css';
+import 'df-croppa/dist/vue-croppa.css';
 ```
 
 Not using build tools:
 
 ```html
-<link href="https://unpkg.com/vue-croppa/dist/vue-croppa.min.css" rel="stylesheet" type="text/css">
-<script src="https://unpkg.com/vue-croppa/dist/vue-croppa.min.js"></script>
+<link href="https://unpkg.com/df-croppa/dist/vue-croppa.min.css" rel="stylesheet" type="text/css">
+<script src="https://unpkg.com/df-croppa/dist/vue-croppa.min.js"></script>
 ```
 
 ```js
@@ -141,7 +139,7 @@ Live example: https://jsfiddle.net/jdcvpvty/2/
 
 ```js
 import Vue from 'vue';
-import Croppa from 'vue-croppa';
+import Croppa from 'df-croppa';
 
 Vue.use(Croppa, { componentName: 'my-image-cropper' });
 ```
@@ -176,6 +174,13 @@ this.$refs.myCroppa.generateDataUrl();
 ## Documentation
 
 ### 🌱 Props
+
+#### fillPlaceholderImage
+
+Disable the fill property of the placeholder image. The image placeholder will fit the croppa instead.
+
+* type: `boolean`
+* default: `true`
 
 #### v-model
 
@@ -765,45 +770,3 @@ Note that "computed" and "props" are read-only. Some value on "data" are also no
 
 * Check out [default css styles](https://github.com/zhanziyang/vue-croppa/blob/master/dist/vue-croppa.css). You can add more css styles to those selectors to get a different look. Be careful if you try to overwrite existing styles.
 * Note that CSS styles will not have any effect on the output image.
-
-## Development
-
-#### 1. Fork and clone the repo.
-
-#### 2. Install dependencies.
-
-```bash
-$ cd vue-croppa
-$ npm install
-```
-
-```bash
-$ cd docs
-$ npm install
-```
-
-#### 3. Start developing.
-
-```bash
-# under vue-croppa/
-$ npm run dev
-```
-
-```bash
-# under vue-croppa/docs/
-$ npm run dev
-```
-
-Edit file `./docs/simple-test.html` and open http://localhost:3000/simple-test.html to test while developing.
-
-#### 4. Build
-
-```bash
-# under vue-croppa/
-$ npm run build
-```
-
-## To Do
-
-* [ ] Add unit test.
-* [ ] Big image rotation optimizations (blob url?).
